@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useCart } from "@/context/CartContext";
 import { Menu, Search, ShoppingCart, X } from "lucide-react";
@@ -198,9 +198,7 @@ export default function Header() {
             <div className="hidden sm:flex items-center space-x-2">
               {currentUser ? (
                 <>
-                  <span className="text-sm font-medium text-gray-700 mr-2">
-                    Merhaba, {currentUser.name}
-                  </span>
+                  <span className="text-sm font-medium text-gray-700 mr-2 flex items-center gap-2">{currentUser.picture && <img src={currentUser.picture} className="w-8 h-8 rounded-full" alt="avatar" />} Merhaba, {currentUser.name}</span>
                   <Button
                     variant="outline"
                     size="sm"

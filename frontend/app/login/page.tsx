@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -61,9 +63,28 @@ export default function LoginPage() {
             <div className="text-center text-sm text-muted-foreground mt-4">
               Hesabın yok mu? <Link href="/register" className="text-primary hover:underline">Kayıt Ol</Link>
             </div>
+          <div className="flex items-center my-4">
+              <div className="flex-grow border-t border-muted"></div>
+              <span className="mx-2 text-muted-foreground text-sm">veya</span>
+              <div className="flex-grow border-t border-muted"></div>
+            </div>
+            
+            <div className="flex justify-center mb-4">
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  const decoded = jwtDecode(credentialResponse.credential as string) as any;
+                  localStorage.setItem("currentUser", JSON.stringify({ name: decoded.name, email: decoded.email, picture: decoded.picture }));
+                  window.location.href = "/";
+                }}
+                onError={() => {
+                  setError("Google ile giriş yapılamadı.");
+                }}
+              />
+            </div>
           </form>
         </CardContent>
       </Card>
     </div>
   );
 }
+

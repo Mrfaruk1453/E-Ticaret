@@ -17,6 +17,8 @@ export const metadata: Metadata = {
     "ModaSepeti ile giyim ve aksesuar ürünlerini keşfedin. Beden ve renk seçenekleriyle kolay ve güvenli alışveriş deneyimi.",
 };
 
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,15 +29,17 @@ export default function RootLayout({
       <body
         className={`${inter.className} antialiased flex flex-col min-h-screen`}
       >
-        <CartProvider>
-          <Header />
+        <GoogleOAuthProvider clientId="404045677030-58e13k2r19jmcrqmcb5e8rdc6f9s4i11.apps.googleusercontent.com">
+          <CartProvider>
+            <Header />
 
-          <main className="flex-grow">
-            {children}
-          </main>
+            <main className="flex-grow">
+              {children}
+            </main>
 
-          <Footer />
-        </CartProvider>
+            <Footer />
+          </CartProvider>
+        </GoogleOAuthProvider>
       </body>
     </html>
   );
