@@ -85,7 +85,7 @@ export default function LoginPage() {
             </div>
             
             <div className="flex justify-center mb-4">
-              <Button type="button" variant="outline" onClick={() => { console.log("Google butonuna tıklandı!"); try { loginWithGoogle(); } catch(e) { alert("Buton hatası: " + e.message); } }} className="w-full flex items-center gap-2 justify-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" className="w-5 h-5" /> Google ile Giriş Yap</Button>
+              <Button type="button" variant="outline" onClick={() => { console.log("Google butonuna tıklandı!"); try { loginWithGoogle(); } catch(e: any) { alert("Buton hatası: " + e.message); } }} className="w-full flex items-center gap-2 justify-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" className="w-5 h-5" /> Google ile Giriş Yap</Button>
             </div>
           </form>
         </CardContent>
@@ -93,6 +93,7 @@ export default function LoginPage() {
     </div>
   );
 }
+
 
 
 
