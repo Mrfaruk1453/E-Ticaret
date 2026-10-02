@@ -20,7 +20,7 @@ export default function Header() {
 
   const pathname = usePathname();
 
-  const [currentUser, setCurrentUser] = useState<{name: string, email: string} | null>(null);
+  const [currentUser, setCurrentUser] = useState<{name: string, email: string, picture?: string} | null>(null);
 
   useEffect(() => {
     // Check if user is logged in
@@ -349,3 +349,5 @@ export default function Header() {
     </header>
   );
 }
+
+
