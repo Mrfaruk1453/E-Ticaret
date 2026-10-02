@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { GoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 
 export default function LoginPage() {
@@ -14,6 +14,21 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const loginWithGoogle = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        const res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+          headers: { Authorization: `Bearer ${tokenResponse.access_token}` }
+        });
+        const userInfo = await res.json();
+        localStorage.setItem("currentUser", JSON.stringify({ name: userInfo.name, email: userInfo.email, picture: userInfo.picture }));
+        window.location.href = "/";
+      } catch (err: any) {
+        alert("Google bilgileri alınamadı: " + err.message);
+      }
+    },
+    onError: () => alert("Google ile giriş yapılamadı."),
+  });
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,20 +85,7 @@ export default function LoginPage() {
             </div>
             
             <div className="flex justify-center mb-4">
-              <GoogleLogin
-                                onSuccess={(credentialResponse) => {
-                  try {
-                    const decoded = jwtDecode(credentialResponse.credential as string) as any;
-                    localStorage.setItem("currentUser", JSON.stringify({ name: decoded.name, email: decoded.email, picture: decoded.picture }));
-                    window.location.href = "/";
-                  } catch (err: any) {
-                    alert("Giriş yapılırken bir hata oluştu: " + err.message);
-                  }
-                }}
-                onError={() => {
-                  setError("Google ile giriş yapılamadı.");
-                }}
-              />
+              <Button type="button" variant="outline" onClick={() => loginWithGoogle()} className="w-full flex items-center gap-2 justify-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" className="w-5 h-5" /> Google ile Giriş Yap</Button>
             </div>
           </form>
         </CardContent>
@@ -91,6 +93,8 @@ export default function LoginPage() {
     </div>
   );
 }
+
+
 
 
 

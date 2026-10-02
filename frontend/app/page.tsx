@@ -1,3 +1,4 @@
+﻿export const dynamic = 'force-dynamic';
 import ProductList from "@/components/home/ProductList";
 
 export default async function Home({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {

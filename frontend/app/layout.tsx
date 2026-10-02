@@ -1,4 +1,4 @@
-import Footer from "@/components/layout/Footer";
+﻿import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import { CartProvider } from "@/context/CartContext";
 import type { Metadata } from "next";
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     "ModaSepeti ile giyim ve aksesuar ürünlerini keşfedin. Beden ve renk seçenekleriyle kolay ve güvenli alışveriş deneyimi.",
 };
 
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import { Providers } from "./providers";
 
 export default function RootLayout({
   children,
@@ -29,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} antialiased flex flex-col min-h-screen`}
       >
-        <GoogleOAuthProvider clientId="404045677030-58e13k2r19jmcrqmcb5e8rdc6f9s4i11.apps.googleusercontent.com">
+        <Providers>
           <CartProvider>
             <Header />
 
@@ -39,7 +39,7 @@ export default function RootLayout({
 
             <Footer />
           </CartProvider>
-        </GoogleOAuthProvider>
+        </Providers>
       </body>
     </html>
   );
