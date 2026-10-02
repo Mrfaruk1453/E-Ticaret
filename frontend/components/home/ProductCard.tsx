@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useCart } from "@/context/CartContext";
 import { cn } from "@/lib/utils";
 import { Check, Eye, Heart, ShoppingCart } from "lucide-react";
 import Image from "next/image";
@@ -20,32 +19,7 @@ interface Product {
 export default function ProductCard({ product }: { product: Product }) {
   const [isLiked, setIsLiked] = useState(false);
   const [imageError, setImageError] = useState(false);
-  const [isAdding, setIsAdding] = useState(false);
-  const [justAdded, setJustAdded] = useState(false);
 
-  const { addToCart } = useCart();
-
-  const handleAddToCart = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    setIsAdding(true);
-
-    await new Promise((resolve) => setTimeout(resolve, 300));
-
-    addToCart({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image,
-      quantity: 1,
-    });
-
-    setIsAdding(false);
-    setJustAdded(true);
-
-    setTimeout(() => setJustAdded(false), 2000);
-  };
 
   const handleToggleLike = (e: React.MouseEvent) => {
     e.preventDefault();
