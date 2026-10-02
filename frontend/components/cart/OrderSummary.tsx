@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -23,7 +23,7 @@ export default function OrderSummary() {
   return (
     <Card className="sticky top-4">
       <CardHeader>
-        <CardTitle className="text-lg font-semibold">Order Summary</CardTitle>
+        <CardTitle className="text-lg font-semibold">Sipariş Özeti</CardTitle>
       </CardHeader>
 
       <CardContent className="space-y-4">
@@ -39,9 +39,7 @@ export default function OrderSummary() {
             <span className="text-muted-foreground">Kargo</span>
             <span className="font-medium">
               {shipping === 0 ? (
-                <Badge variant="secondary" className="text-xs">
-                  Ücretsiz
-                </Badge>
+                <Badge variant="secondary" className="text-xs">Ücretsiz</Badge>
               ) : (
                 `${shipping.toFixed(2)} TL`
               )}
@@ -84,25 +82,27 @@ export default function OrderSummary() {
         >
           <Link href="/checkout" className="flex items-center gap-2">
             <CreditCard className="h-4 w-4" />
-            Proceed to Checkout
+            Ödemeye Geç
           </Link>
         </Button>
 
         <div className="space-y-3 pt-4 border-t border-border">
           <div className="flex items-center gap-3 text-sm text-muted-foreground">
             <Shield className="h-4 w-4 text-green-500" />
-            <span>Secure SSL checkout</span>
+            <span>Güvenli SSL ödeme</span>
           </div>
           <div className="flex items-center gap-3 text-sm text-muted-foreground">
             <Truck className="h-4 w-4 text-blue-500" />
-            <span>Free returns within 30 days</span>
+            <span>30 gün içinde ücretsiz iade</span>
           </div>
           <div className="flex items-center gap-3 text-sm text-muted-foreground">
             <Heart className="h-4 w-4 text-red-500" />
-            <span>24/7 customer support</span>
+            <span>7/24 müşteri desteği</span>
           </div>
         </div>
       </CardContent>
     </Card>
   );
 }
+
+

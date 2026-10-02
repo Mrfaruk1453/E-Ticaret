@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+﻿import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
@@ -7,7 +7,7 @@ export default function Recommendations() {
     <div className="mt-16">
       <Card>
         <CardHeader>
-          <CardTitle>You might also like</CardTitle>
+          <CardTitle>Şunlar da hoşunuza gidebilir</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center py-8">
@@ -23,3 +23,4 @@ export default function Recommendations() {
     </div>
   );
 }
+

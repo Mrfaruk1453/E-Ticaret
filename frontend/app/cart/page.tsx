@@ -21,9 +21,9 @@ export default function Cart() {
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Shopping Cart</h1>
+          <h1 className="text-3xl font-bold text-foreground">Alışveriş Sepeti</h1>
           <p className="text-muted-foreground mt-2">
-            {itemCount} {itemCount === 1 ? "item" : "items"} in your cart
+            Sepetinizde {itemCount} ürün var
           </p>
         </div>
 
@@ -34,7 +34,7 @@ export default function Cart() {
         >
           <Link href="/" className="flex items-center gap-2">
             <ArrowLeft className="h-4 w-4" />
-            Continue Shopping
+            Alışverişe Devam Et
           </Link>
         </Button>
       </div>

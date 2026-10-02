@@ -12,7 +12,7 @@ export default function CartItemList() {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-        <CardTitle className="text-lg font-semibold">Cart Items</CardTitle>
+        <CardTitle className="text-lg font-semibold">Sepetteki Ürünler</CardTitle>
         <Button
           variant="ghost"
           size="sm"
@@ -20,7 +20,7 @@ export default function CartItemList() {
           className="text-muted-foreground hover:text-destructive"
         >
           <Trash2 className="h-4 w-4 mr-2" />
-          Clear All
+          Tümünü Temizle
         </Button>
       </CardHeader>
 

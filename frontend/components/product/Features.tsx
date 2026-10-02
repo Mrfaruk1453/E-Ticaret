@@ -3,9 +3,9 @@ import { RotateCcw, Shield, Truck } from "lucide-react";
 
 export default function Features() {
   const features = [
-    { icon: Truck, title: "Free Shipping", desc: "On orders over $50" },
-    { icon: Shield, title: "Warranty", desc: "1 year guarantee" },
-    { icon: RotateCcw, title: "Easy Returns", desc: "30-day return policy" },
+    { icon: Truck, title: "Ücretsiz Kargo", desc: "500 TL üzeri siparişlerde" },
+    { icon: Shield, title: "Garanti", desc: "1 yıl garanti" },
+    { icon: RotateCcw, title: "Kolay İade", desc: "30 gün iade politikası" },
   ];
   return (
     <Card className="mb-16">
