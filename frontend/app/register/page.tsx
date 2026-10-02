@@ -69,10 +69,14 @@ export default function RegisterPage() {
             
             <div className="flex justify-center mb-4">
               <GoogleLogin
-                onSuccess={(credentialResponse) => {
-                  const decoded = jwtDecode(credentialResponse.credential as string) as any;
-                  localStorage.setItem("currentUser", JSON.stringify({ name: decoded.name, email: decoded.email, picture: decoded.picture }));
-                  window.location.href = "/";
+                                onSuccess={(credentialResponse) => {
+                  try {
+                    const decoded = jwtDecode(credentialResponse.credential as string) as any;
+                    localStorage.setItem("currentUser", JSON.stringify({ name: decoded.name, email: decoded.email, picture: decoded.picture }));
+                    window.location.href = "/";
+                  } catch (err) {
+                    alert("Kayıt olunurken bir hata oluştu: " + err.message);
+                  }
                 }}
                 onError={() => {
                   alert("Google ile kayıt olunamadı.");
@@ -85,6 +89,7 @@ export default function RegisterPage() {
     </div>
   );
 }
+
 
 
 
