@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+﻿import { Button } from "@/components/ui/button";
 import { Shield, ShoppingBag, Truck } from "lucide-react";
 import Link from "next/link";
 
@@ -9,10 +9,10 @@ export default function EmptyCart() {
         <div className="mb-8">
           <ShoppingBag className="h-24 w-24 text-muted-foreground mx-auto mb-4" />
           <h1 className="text-3xl font-bold text-foreground mb-4">
-            Your cart is empty
+            Sepetiniz boş
           </h1>
           <p className="text-muted-foreground text-lg">
-            Looks like you haven&apos;t added anything to your cart yet.
+            Görünüşe göre sepetinize henüz bir şey eklemediniz.
           </p>
         </div>
 
@@ -22,17 +22,17 @@ export default function EmptyCart() {
             size="lg"
             className="bg-primary text-primary-foreground hover:bg-primary/90"
           >
-            <Link href="/">Continue Shopping</Link>
+            <Link href="/">Alışverişe Devam Et</Link>
           </Button>
 
           <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
               <Truck className="h-4 w-4" />
-              Free shipping over $50
+              50 TL üzeri kargo bedava
             </div>
             <div className="flex items-center gap-2">
               <Shield className="h-4 w-4" />
-              Secure checkout
+              Güvenli ödeme
             </div>
           </div>
         </div>
@@ -40,3 +40,4 @@ export default function EmptyCart() {
     </div>
   );
 }
+
