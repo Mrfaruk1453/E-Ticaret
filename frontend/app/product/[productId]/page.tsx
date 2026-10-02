@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Features from "@/components/product/Features";
 import ProductBreadcrumb from "@/components/product/ProductBreadcrumb";
@@ -39,7 +39,7 @@ export default function Product() {
 
   useEffect(() => {
     const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-    fetch(`${API_URL}/api/products/${productId}`)
+    fetch(`${API_URL}/api/products/${productId}?t=${Date.now()}`)
       .then(res => res.json())
       .then(data => {
         if (!data.error) {
@@ -283,3 +283,4 @@ export default function Product() {
     </div>
   );
 }
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,7 +11,7 @@ export default function AdminPage() {
   const fetchOrders = async () => {
     try {
       const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-      const res = await fetch(`${API_URL}/api/admin/orders`);
+      const res = await fetch(`${API_URL}/api/admin/orders?t=${Date.now()}`);
       const data = await res.json();
       setOrders(data);
     } catch (err) {
@@ -111,3 +111,4 @@ export default function AdminPage() {
     </div>
   );
 }
+
