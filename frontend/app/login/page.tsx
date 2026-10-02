@@ -76,7 +76,7 @@ export default function LoginPage() {
                     const decoded = jwtDecode(credentialResponse.credential as string) as any;
                     localStorage.setItem("currentUser", JSON.stringify({ name: decoded.name, email: decoded.email, picture: decoded.picture }));
                     window.location.href = "/";
-                  } catch (err) {
+                  } catch (err: any) {
                     alert("Giriş yapılırken bir hata oluştu: " + err.message);
                   }
                 }}
@@ -91,5 +91,6 @@ export default function LoginPage() {
     </div>
   );
 }
+
 
 

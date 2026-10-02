@@ -74,7 +74,7 @@ export default function RegisterPage() {
                     const decoded = jwtDecode(credentialResponse.credential as string) as any;
                     localStorage.setItem("currentUser", JSON.stringify({ name: decoded.name, email: decoded.email, picture: decoded.picture }));
                     window.location.href = "/";
-                  } catch (err) {
+                  } catch (err: any) {
                     alert("Kayıt olunurken bir hata oluştu: " + err.message);
                   }
                 }}
@@ -89,6 +89,7 @@ export default function RegisterPage() {
     </div>
   );
 }
+
 
 
 
