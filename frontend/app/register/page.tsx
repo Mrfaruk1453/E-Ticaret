@@ -75,7 +75,7 @@ export default function RegisterPage() {
                   window.location.href = "/";
                 }}
                 onError={() => {
-                  setError("Google ile kayıt olunamadı.");
+                  alert("Google ile kayıt olunamadı.");
                 }}
               />
             </div>
@@ -85,4 +85,6 @@ export default function RegisterPage() {
     </div>
   );
 }
+
+
 
