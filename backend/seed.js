@@ -1,4 +1,4 @@
-const pool = require('./db');
+﻿const pool = require('./db');
 
 async function runSeed() {
   const client = await pool.connect();
@@ -89,7 +89,7 @@ async function runSeed() {
     const genders = ['Erkek', 'Kadin', 'Unisex'];
     const colors = ['Siyah', 'Beyaz', 'Lacivert', 'Gri', 'Kahverengi', 'Kirmizi', 'Haki'];
     const fits = ['Slim Fit', 'Oversize', 'Basic', 'Klasik', 'Spor', 'Rahat', 'V Yaka'];
-    const nouns = ['Tisort', 'Pantolon', 'Ceket', 'Kazak', 'Sapka', 'Gozluk', 'CCanta', 'Bot'];
+    const nouns = ['Tisort', 'Pantolon', 'Ceket', 'Kazak', 'Sapka', 'Gozluk', 'Canta', 'Bot'];
 
     function slugify(text) {
       const charMap = {'ç':'c','ğ':'g','ı':'i','ö':'o','ş':'s','ü':'u','Ç':'C','Ğ':'G','İ':'I','Ö':'O','Ş':'S','Ü':'U'};
@@ -102,7 +102,7 @@ async function runSeed() {
     
     // Sadece çalışan Unsplash resimleri
     const nounImages = {
-      'Tişört': [
+      'Tisort': [
         "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=600&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=600&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=600&auto=format&fit=crop",
@@ -122,17 +122,17 @@ async function runSeed() {
         "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=600&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=600&auto=format&fit=crop"
       ],
-      'Şapka': [
+      'Sapka': [
         "https://images.unsplash.com/photo-1533827432537-70133748f5c8?q=80&w=600&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=600&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?q=80&w=600&auto=format&fit=crop"
       ],
-      'Gözlük': [
+      'Gozluk': [
         "https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=600&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1577803645773-f96470509666?q=80&w=600&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1582142407894-ec85a1260a46?q=80&w=600&auto=format&fit=crop"
       ],
-      'ÇCanta': [
+      'Canta': [
         "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=600&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=600&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1591561954557-26941169b49e?q=80&w=600&auto=format&fit=crop",
@@ -145,8 +145,8 @@ async function runSeed() {
     };
 
     const counters = {
-      'Tişört': 0, 'Pantolon': 0, 'Ceket': 0, 'Kazak': 0,
-      'Şapka': 0, 'Gözlük': 0, 'ÇCanta': 0, 'Bot': 0
+      'Tisort': 0, 'Pantolon': 0, 'Ceket': 0, 'Kazak': 0,
+      'Sapka': 0, 'Gozluk': 0, 'Canta': 0, 'Bot': 0
     };
 
     
@@ -220,3 +220,5 @@ async function runSeed() {
 }
 
 runSeed();
+
+

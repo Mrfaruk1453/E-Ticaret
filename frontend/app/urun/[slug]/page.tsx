@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+﻿import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ClientProduct from "./ClientProduct";
 
@@ -21,8 +21,8 @@ async function getProduct(slug: string) {
   }
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const product = await getProduct(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const product = await getProduct((await params).slug);
 
   if (!product) {
     return {
@@ -42,8 +42,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function ProductPage({ params }: { params: { slug: string } }) {
-  const product = await getProduct(params.slug);
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+  const product = await getProduct((await params).slug);
 
   if (!product) {
     notFound();
@@ -68,7 +68,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
       availability: product.variants?.some((v: any) => v.stock_quantity > 0) 
         ? "https://schema.org/InStock" 
         : "https://schema.org/OutOfStock",
-      url: `https://e-ticaret-red-mu.vercel.app/urun/${params.slug}`
+      url: `https://e-ticaret-red-mu.vercel.app/urun/${(await params).slug}`
     }
   };
 
@@ -92,7 +92,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
         "@type": "ListItem",
         position: 3,
         name: product.name,
-        item: `https://e-ticaret-red-mu.vercel.app/urun/${params.slug}`
+        item: `https://e-ticaret-red-mu.vercel.app/urun/${(await params).slug}`
       }
     ]
   };
@@ -111,3 +111,4 @@ export default async function ProductPage({ params }: { params: { slug: string }
     </>
   );
 }
+
