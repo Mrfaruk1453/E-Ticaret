@@ -1,4 +1,4 @@
-import ProductCard from "./ProductCard";
+﻿import ProductCard from "./ProductCard";
 
 interface ProductListProps {
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }> | { [key: string]: string | string[] | undefined };
@@ -24,7 +24,7 @@ export default async function ProductList({ searchParams }: ProductListProps = {
         name: p.name,
         price: p.price / 100, // Kuruşu TL'ye çeviriyoruz
         image: p.image_url || "/placeholder.jpg",
-        category: p.category_name
+        category: p.category_name,\n          slug: p.slug
       }));
     }
   } catch (error) {
@@ -51,3 +51,4 @@ export default async function ProductList({ searchParams }: ProductListProps = {
     </div>
   );
 }
+

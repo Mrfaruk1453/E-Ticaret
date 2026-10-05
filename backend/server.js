@@ -53,6 +53,31 @@ app.get('/api/products', async (req, res) => {
 });
 
 // Ürün Detayı ve Varyantları API'si
+
+// Urun Detayi by SLUG (SEO icin)
+app.get('/api/products/slug/:slug', async (req, res) => {
+    try {
+        const { slug } = req.params;
+        
+        // Urun bilgisini cek
+        const productResult = await pool.query('SELECT p.*, c.name as category_name, c.slug as category_slug FROM products p LEFT JOIN categories c ON p.category_id = c.id WHERE p.slug = $1', [slug]);
+        if (productResult.rows.length === 0) {
+            return res.status(404).json({ error: 'Urun bulunamadi' });
+        }
+        
+        const product = productResult.rows[0];
+        
+        // Varyantlarini (renk, beden, stok) cek
+        const variantsResult = await pool.query('SELECT * FROM variants WHERE product_id = $1', [product.id]);
+        product.variants = variantsResult.rows;
+        
+        res.json(product);
+    } catch (error) {
+        console.error('Urun detayi cekilirken hata:', error);
+        res.status(500).json({ error: 'Sunucu hatasi' });
+    }
+});
+
 app.get('/api/products/:id', async (req, res) => {
     try {
         const { id } = req.params;

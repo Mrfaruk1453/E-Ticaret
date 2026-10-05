@@ -12,7 +12,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ [
         </p>
 
         <h1 className="text-4xl font-semibold tracking-tight text-primary sm:text-5xl lg:text-6xl">
-          Tarzını Keşfet
+          Online Giyim ve Aksesuar Alışverişi
         </h1>
 
         <p className="mx-auto max-w-3xl text-base text-foreground sm:text-lg">
@@ -28,3 +28,4 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ [
     </div>
   );
 }
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,7 +13,7 @@ interface Product {
   image: string;
   name: string;
   price: number;
-  category?: string;
+  category?: string;\n  slug?: string;
 }
 
 export default function ProductCard({ product }: { product: Product }) {
@@ -46,7 +46,7 @@ export default function ProductCard({ product }: { product: Product }) {
           />
         </Button>
 
-        <Link href={`/product/${product.id}`} className="block relative">
+        <Link href={`/urun/${product.slug || product.id}`} className="block relative">
           <div className="aspect-square overflow-hidden bg-muted">
             {!imageError ? (
               <Image
@@ -79,7 +79,7 @@ export default function ProductCard({ product }: { product: Product }) {
       </div>
 
       <CardContent className="p-4 space-y-3">
-        <Link href={`/product/${product.id}`}>
+        <Link href={`/urun/${product.slug || product.id}`}>
           <h2 className="font-semibold text-foreground line-clamp-2 hover:text-primary transition-colors">
             {product.name}
           </h2>
@@ -91,7 +91,7 @@ export default function ProductCard({ product }: { product: Product }) {
           </span>
         </div>
 
-        <Link href={`/product/${product.id}`} className="w-full block">
+        <Link href={`/urun/${product.slug || product.id}`} className="w-full block">
           <Button
             className="w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
           >
@@ -105,3 +105,4 @@ export default function ProductCard({ product }: { product: Product }) {
     </Card>
   );
 }
+

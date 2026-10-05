@@ -28,6 +28,7 @@ async function runSeed() {
         id SERIAL PRIMARY KEY,
         category_id INTEGER REFERENCES categories(id),
         name VARCHAR(255) NOT NULL,
+        slug VARCHAR(255) UNIQUE NOT NULL,
         description TEXT,
         price INTEGER NOT NULL, -- Hocanın notu: Kuruş cinsinden tutulmalı
         image_url VARCHAR(255)
@@ -84,8 +85,20 @@ async function runSeed() {
 
     console.log("30 Adet ürün ekleniyor...");
     const products = [];
-    const adjectives = ['Harika', 'Şık', 'Yeni', 'Klasik', 'Spor', 'Rahat', 'Trend'];
-    const nouns = ['Tişört', 'Pantolon', 'Ceket', 'Kazak', 'Şapka', 'Gözlük', 'Çanta', 'Bot'];
+    
+    const genders = ['Erkek', 'Kadin', 'Unisex'];
+    const colors = ['Siyah', 'Beyaz', 'Lacivert', 'Gri', 'Kahverengi', 'Kirmizi', 'Haki'];
+    const fits = ['Slim Fit', 'Oversize', 'Basic', 'Klasik', 'Spor', 'Rahat', 'V Yaka'];
+    const nouns = ['Tisort', 'Pantolon', 'Ceket', 'Kazak', 'Sapka', 'Gozluk', 'CCanta', 'Bot'];
+
+    function slugify(text) {
+      const charMap = {'ç':'c','ğ':'g','ı':'i','ö':'o','ş':'s','ü':'u','Ç':'C','Ğ':'G','İ':'I','Ö':'O','Ş':'S','Ü':'U'};
+      return text.toString().toLowerCase().split('').map(char => charMap[char] || char).join('')
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9\-]+/g, '')
+        .replace(/\-\-+/g, '-');
+    }
+
     
     // Sadece çalışan Unsplash resimleri
     const nounImages = {
@@ -119,7 +132,7 @@ async function runSeed() {
         "https://images.unsplash.com/photo-1577803645773-f96470509666?q=80&w=600&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1582142407894-ec85a1260a46?q=80&w=600&auto=format&fit=crop"
       ],
-      'Çanta': [
+      'ÇCanta': [
         "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=600&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=600&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1591561954557-26941169b49e?q=80&w=600&auto=format&fit=crop",
@@ -133,26 +146,33 @@ async function runSeed() {
 
     const counters = {
       'Tişört': 0, 'Pantolon': 0, 'Ceket': 0, 'Kazak': 0,
-      'Şapka': 0, 'Gözlük': 0, 'Çanta': 0, 'Bot': 0
+      'Şapka': 0, 'Gözlük': 0, 'ÇCanta': 0, 'Bot': 0
     };
 
+    
     for (let i = 1; i <= 30; i++) {
       const catId = categoryIds[i % 3];
       const noun = nouns[i % nouns.length];
-      const name = adjectives[i % adjectives.length] + ' ' + noun + ' ' + i;
-      const price = (Math.floor(Math.random() * 500) + 50) * 100; // 50 TL - 550 TL arası (kuruş)
+      const gender = genders[i % genders.length];
+      const color = colors[i % colors.length];
+      const fit = fits[i % fits.length];
+      
+      const name = `${gender} ${color} ${fit} ${noun}`;
+      const slug = slugify(name) + '-' + i;
+      const price = (Math.floor(Math.random() * 500) + 50) * 100;
       
       const imagesArr = nounImages[noun] || [];
       const idx = counters[noun]++;
       const imageUrl = imagesArr.length > 0 ? imagesArr[idx % imagesArr.length] : 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=600&auto=format&fit=crop';
       
       const prodRes = await client.query(`
-        INSERT INTO products (category_id, name, description, price, image_url) 
-        VALUES ($1, $2, $3, $4, $5) RETURNING id;
-      `, [catId, name, name + ' için harika bir açıklama.', price, imageUrl]);
+        INSERT INTO products (category_id, name, slug, description, price, image_url) 
+        VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;
+      `, [catId, name, slug, name + ' icin harika bir urun. Sik ve rahat tasarimiyla gunluk kombinleriniz icin idealdir. ModaSepeti guvencesiyle hemen satin alin.', price, imageUrl]);
       
       products.push(prodRes.rows[0].id);
     }
+
 
     console.log("Varyantlar (Stoklar) ekleniyor...");
     let skuCounter = 1000;
