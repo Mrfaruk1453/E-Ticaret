@@ -13,7 +13,7 @@ interface Product {
   image: string;
   name: string;
   price: number;
-  category?: string;\n  slug?: string;
+  category?: string; slug?: string;
 }
 
 export default function ProductCard({ product }: { product: Product }) {
@@ -105,4 +105,5 @@ export default function ProductCard({ product }: { product: Product }) {
     </Card>
   );
 }
+
 

@@ -24,7 +24,7 @@ export default async function ProductList({ searchParams }: ProductListProps = {
         name: p.name,
         price: p.price / 100, // Kuruşu TL'ye çeviriyoruz
         image: p.image_url || "/placeholder.jpg",
-        category: p.category_name,\n          slug: p.slug
+        category: p.category_name, slug: p.slug
       }));
     }
   } catch (error) {
@@ -51,4 +51,5 @@ export default async function ProductList({ searchParams }: ProductListProps = {
     </div>
   );
 }
+
 
